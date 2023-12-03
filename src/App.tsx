@@ -1,13 +1,10 @@
 import "./main.css";
 
-import Header from "./components/Header";
+import DesktopLayout from "./components/Layouts/Desktop";
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <div>Hello World!</div>
-    </div>
+    <DesktopLayout />
   )
 }
 
