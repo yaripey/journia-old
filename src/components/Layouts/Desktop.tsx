@@ -3,6 +3,7 @@ import { iconNames } from "../Common/Icons";
 
 import { ToolBarDesktop } from "../Common/ToolBar";
 import { ContentBlock } from "../../types";
+import BlockList from "../Pages/Timeline/CardList";
 
 const DesktopLayout = (
   props: {
@@ -22,7 +23,7 @@ const DesktopLayout = (
         selectedIcon={selectedNavButton}
         buttonOnClick={handleNavButtonClick}
       />
-      <div>{props.blocks.map(block => <p>{block.title}</p>)}</div>
+      <BlockList blocks={props.blocks} />
     </div>
   )
 }
