@@ -3,7 +3,7 @@ import { iconNames } from "../Common/Icons";
 
 import { ToolBarDesktop } from "../Common/ToolBar";
 import { ContentBlock } from "../../types";
-import BlockList from "../Pages/Timeline/CardList";
+import TimelinePage from "../Pages/Timeline/TimelinePage";
 
 const DesktopLayout = (
   props: {
@@ -23,7 +23,7 @@ const DesktopLayout = (
         selectedIcon={selectedNavButton}
         buttonOnClick={handleNavButtonClick}
       />
-      <BlockList blocks={props.blocks} />
+      <TimelinePage blocks={props.blocks} setBlocks={props.setBlocks} />
     </div>
   )
 }

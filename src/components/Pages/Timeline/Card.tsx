@@ -7,7 +7,7 @@ export const Card = (
     block: ContentBlock,
   }
 ) => {
-  return <li className="m-5">
+  return <li className="p-3">
     <p className="text-sm">{makeDateReadable(props.block.createdAt)}</p>
     <p>{props.block.title}</p>
   </li>
