@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { iconNames } from "../Common/Icons";
-
 import { ToolBarDesktop } from "../Common/ToolBar";
 import { ContentBlock } from "../../types";
 import TimelinePage from "../Pages/Timeline/TimelinePage";
@@ -11,18 +8,9 @@ const DesktopLayout = (
     setBlocks: (blocks: Array<ContentBlock>) => void,
   }
 ) => {
-  const [selectedNavButton, setSelectedNavButton] = useState(iconNames.home);
-
-  const handleNavButtonClick = (buttonName: string): void => {
-    setSelectedNavButton(buttonName);
-  }
-
   return (
     <div className="h-full w-full flex flex-row">
-      <ToolBarDesktop
-        selectedIcon={selectedNavButton}
-        buttonOnClick={handleNavButtonClick}
-      />
+      <ToolBarDesktop />
       <TimelinePage blocks={props.blocks} setBlocks={props.setBlocks} />
     </div>
   )
