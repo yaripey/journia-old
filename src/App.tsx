@@ -1,7 +1,7 @@
 import "./main.css";
 
 import DesktopLayout from "./components/Layouts/Desktop";
-import { ContentBlock } from "./types";
+import { ContentBlock, PageName } from "./types";
 import { useState } from "react";
 
 const App = () => {
@@ -51,6 +51,7 @@ const App = () => {
   ];
 
   const [blocks, setBlocks] = useState(testData);
+  const [currentPage, setCurrentPage] = useState<PageName>("timeline");
 
   const updateBlocks = (blocks: Array<ContentBlock>): void => {
     setBlocks(blocks);
@@ -60,6 +61,8 @@ const App = () => {
     <DesktopLayout
       blocks={blocks}
       setBlocks={updateBlocks}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
     />
   )
 }

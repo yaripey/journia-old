@@ -1,3 +1,4 @@
+import { PageName } from "../../types";
 import { Icon, IconName } from "./Icons";
 
 interface NavButton {
@@ -6,7 +7,15 @@ interface NavButton {
   onClick: () => void,
 }
 
-export const ToolBarDesktop = () => {
+export const ToolBarDesktop = (
+  props: {
+    setCurrentPage: React.Dispatch<PageName>,
+  }
+) => {
+  const openEditorWithNewBlock = () => {
+    props.setCurrentPage("editor");
+  }
+
   const defaultButtonStyles = [
     "w-12",
     "h-12",
@@ -48,7 +57,7 @@ export const ToolBarDesktop = () => {
         buttonStyles={defaultButtonStyles.join(" ")}
         iconStyles={defaultIconStyles.join(" ")}
         iconName="new"
-        onClick={() => console.log("New is pressed")}
+        onClick={openEditorWithNewBlock}
       />
     </ul>
   </div>
