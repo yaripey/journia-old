@@ -6,7 +6,7 @@ const CardList = (
     blocks: Array<ContentBlock>,
   }
 ) => {
-  return (<ul>
+  return (<ul className="bg-yellow-200 w-2/3">
     {props.blocks.map(block => <Card block={block} />)}
   </ul>)
 }
