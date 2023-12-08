@@ -1,8 +1,9 @@
 import "./main.css";
 
 import DesktopLayout from "./components/Layouts/Desktop";
-import { ContentBlock, PageName } from "./types";
+import { ContentBlock, NoteBlock, PageName } from "./types";
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 const App = () => {
   const testData: Array<ContentBlock> = [
@@ -52,17 +53,57 @@ const App = () => {
 
   const [blocks, setBlocks] = useState(testData);
   const [currentPage, setCurrentPage] = useState<PageName>("home");
+  const [editingBlock, setEditingBlock] = useState<ContentBlock | null>(null);
 
-  const updateBlocks = (blocks: Array<ContentBlock>): void => {
-    setBlocks(blocks);
+  const createNoteBlock = (
+    title: string,
+    text: string,
+    onSaved: (newNoteBlock: NoteBlock) => void,
+    // onError: (erro: string) => void,
+  ): void => {
+    const newNoteBlock: NoteBlock = {
+      id: uuidv4(),
+      createdAt: Date.now(),
+      lastEditedAt: Date.now(),
+      title,
+      text,
+      type: "note",
+    }
+
+    setBlocks([...blocks, newNoteBlock]);
+
+    onSaved(newNoteBlock);
+  }
+
+  const updateNoteBlock = (
+    noteBlock: NoteBlock,
+    onSaved: () => void,
+    onError: (err: string) => void,
+  ): void => {
+    const blockToUpdate = blocks.find(block => block.id === noteBlock.id);
+
+    if (blockToUpdate) {
+      setBlocks(
+        blocks.map(block => block.id === noteBlock.id ? noteBlock : block)
+      );
+      onSaved();
+    } else {
+      onError("ERROR: Tried saving block with invalid ID.");
+    }
   }
 
   return (
     <DesktopLayout
       blocks={blocks}
-      setBlocks={updateBlocks}
+
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
+
+      editingBlock={editingBlock}
+      setEditingBlock={setEditingBlock}
+
+      createNoteBlock={createNoteBlock}
+      updateNoteBlock={updateNoteBlock}
     />
   )
 }

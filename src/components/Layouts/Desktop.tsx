@@ -1,5 +1,5 @@
 import { ToolBarDesktop } from "../Common/ToolBar";
-import { ContentBlock, PageName } from "../../types";
+import { ContentBlock, NoteBlock, PageName } from "../../types";
 import HomePage from "../Pages/Home/HomePage";
 import EditorPage from "../Pages/Editor/EditorPage";
 
@@ -7,8 +7,25 @@ const DesktopLayout = (
   props: {
     blocks: Array<ContentBlock>,
     setBlocks: (blocks: Array<ContentBlock>) => void,
+
+    createNoteBlock: (
+      title: string,
+      text: string,
+      onSaved: (newNoteBlock: NoteBlock) => void,
+      // onError: (erro: string) => void,
+    ) => void,
+
+    updateNoteBlock: (
+      noteBlock: NoteBlock,
+      onSaved: () => void,
+      onError: (err: string) => void,
+    ) => void,
+
     currentPage: PageName,
     setCurrentPage: React.Dispatch<PageName>,
+
+    editingBlock: ContentBlock | null,
+    setEditingBlock: React.Dispatch<ContentBlock | null>,
   }
 ) => {
   switch (props.currentPage) {
@@ -16,7 +33,12 @@ const DesktopLayout = (
       return (
         <div className="h-full w-full flex flex-row overflow-hidden">
           <ToolBarDesktop setCurrentPage={props.setCurrentPage} />
-          <HomePage blocks={props.blocks} setBlocks={props.setBlocks} />
+          <HomePage
+            blocks={props.blocks}
+            setBlocks={props.setBlocks}
+            setCurrentPage={props.setCurrentPage}
+            setEditingBlock={props.setEditingBlock}
+          />
         </div>
       )
 
@@ -24,7 +46,12 @@ const DesktopLayout = (
       return (
         <div className="h-full w-full flex flex-row overflow-hidden">
           <ToolBarDesktop setCurrentPage={props.setCurrentPage} />
-          <EditorPage />
+          <EditorPage
+            editingBlock={props.editingBlock}
+            setEditingBlock={props.setEditingBlock}
+            createNoteBlock={props.createNoteBlock}
+            updateNoteBlock={props.updateNoteBlock}
+          />
         </div>
       )
 
