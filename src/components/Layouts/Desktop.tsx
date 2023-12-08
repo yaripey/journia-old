@@ -14,7 +14,7 @@ const DesktopLayout = (
   switch (props.currentPage) {
     case "home":
       return (
-        <div className="h-full w-full flex flex-row">
+        <div className="h-full w-full flex flex-row overflow-hidden">
           <ToolBarDesktop setCurrentPage={props.setCurrentPage} />
           <HomePage blocks={props.blocks} setBlocks={props.setBlocks} />
         </div>
@@ -22,7 +22,7 @@ const DesktopLayout = (
 
     case "editor":
       return (
-        <div className="h-full w-full flex flex-row">
+        <div className="h-full w-full flex flex-row overflow-hidden">
           <ToolBarDesktop setCurrentPage={props.setCurrentPage} />
           <EditorPage />
         </div>
@@ -30,7 +30,7 @@ const DesktopLayout = (
 
     case "search":
       return (
-        <div className="h-full w-full flex flex-row">
+        <div className="h-full w-full flex flex-row overflow-hidden">
           <ToolBarDesktop setCurrentPage={props.setCurrentPage} />
           <div>Hey its a search</div>
         </div>
