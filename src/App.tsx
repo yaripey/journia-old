@@ -51,7 +51,7 @@ const App = () => {
   ];
 
   const [blocks, setBlocks] = useState(testData);
-  const [currentPage, setCurrentPage] = useState<PageName>("timeline");
+  const [currentPage, setCurrentPage] = useState<PageName>("home");
 
   const updateBlocks = (blocks: Array<ContentBlock>): void => {
     setBlocks(blocks);

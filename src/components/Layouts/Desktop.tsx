@@ -1,6 +1,6 @@
 import { ToolBarDesktop } from "../Common/ToolBar";
 import { ContentBlock, PageName } from "../../types";
-import TimelinePage from "../Pages/Timeline/TimelinePage";
+import HomePage from "../Pages/Home/HomePage";
 import EditorPage from "../Pages/Editor/EditorPage";
 
 const DesktopLayout = (
@@ -12,11 +12,11 @@ const DesktopLayout = (
   }
 ) => {
   switch (props.currentPage) {
-    case "timeline":
+    case "home":
       return (
         <div className="h-full w-full flex flex-row">
           <ToolBarDesktop setCurrentPage={props.setCurrentPage} />
-          <TimelinePage blocks={props.blocks} setBlocks={props.setBlocks} />
+          <HomePage blocks={props.blocks} setBlocks={props.setBlocks} />
         </div>
       )
 

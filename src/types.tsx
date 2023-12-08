@@ -22,6 +22,6 @@ export interface TodoBlock extends Block {
   subTodos: Array<SubTodo>,
 }
 
-export type PageName = "timeline" | "search" | "editor";
+export type PageName = "home" | "search" | "editor";
 
 export type ContentBlock = NoteBlock | TodoBlock;

@@ -1,7 +1,7 @@
 import { ContentBlock } from "../../../types";
 import CardList from "./CardList"
 
-const TimelinePage = (
+const HomePage = (
   props: {
     blocks: Array<ContentBlock>,
     setBlocks: (blocks: Array<ContentBlock>) => void,
@@ -14,4 +14,4 @@ const TimelinePage = (
   )
 }
 
-export default TimelinePage;
+export default HomePage;

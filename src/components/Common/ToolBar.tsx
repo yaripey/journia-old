@@ -16,6 +16,10 @@ export const ToolBarDesktop = (
     props.setCurrentPage("editor");
   }
 
+  const openHomePage = () => {
+    props.setCurrentPage("home");
+  }
+
   const defaultButtonStyles = [
     "w-12",
     "h-12",
@@ -32,7 +36,7 @@ export const ToolBarDesktop = (
     {
       name: "home",
       iconName: "home",
-      onClick: () => console.log("Home is clicked"),
+      onClick: openHomePage,
     }
   ];
 
