@@ -1,59 +1,28 @@
 import "./main.css";
 
+import testData from "./testData";
+
 import DesktopLayout from "./components/Layouts/Desktop";
 import { ContentBlock, NoteBlock, PageName } from "./types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { State, addNoteBlockAction, addNoteBlocksAction, updateNoteBlockAction } from "./reducers/mainReducer";
 
 const App = () => {
-  const testData: Array<ContentBlock> = [
-    {
-      id: "1",
-      title: "Test title",
-      text: "Test note",
-      createdAt: Date.now(),
-      lastEditedAt: Date.now(),
-      type: "note",
-    },
-    {
-      id: "2",
-      title: "Test title",
-      text: "Another Test Note",
-      createdAt: Date.now(),
-      lastEditedAt: Date.now(),
-      type: "note",
-    },
-    {
-      id: "3",
-      type: "todo",
-      title: "This is a super todo",
-      subTodos: [
-        {
-          text: "First subtodo",
-          isDone: false,
-        },
-        {
-          text: "Another subtodo",
-          isDone: true,
-        },
-      ],
-      isDone: false,
-      createdAt: Date.now(),
-      lastEditedAt: Date.now(),
-    },
-    {
-      id: "4",
-      title: "Test title",
-      text: "The bestest note out there",
-      createdAt: Date.now(),
-      lastEditedAt: Date.now(),
-      type: "note",
-    },
-  ];
-
-  const [blocks, setBlocks] = useState(testData);
   const [currentPage, setCurrentPage] = useState<PageName>("home");
   const [editingBlock, setEditingBlock] = useState<ContentBlock | null>(null);
+
+  const dispatch = useDispatch();
+  const blocks = useSelector((state: State) => state.blocks);
+
+  useEffect(() => {
+    // Here should be initial data fetching
+    if (blocks.length === 0) {
+      dispatch(addNoteBlocksAction({ blocks: testData }));
+    }
+  }, [dispatch, blocks]);
 
   const createNoteBlock = (
     title: string,
@@ -70,7 +39,7 @@ const App = () => {
       type: "note",
     }
 
-    setBlocks([...blocks, newNoteBlock]);
+    dispatch(addNoteBlockAction({ block: newNoteBlock }));
 
     onSaved(newNoteBlock);
   }
@@ -83,9 +52,7 @@ const App = () => {
     const blockToUpdate = blocks.find(block => block.id === noteBlock.id);
 
     if (blockToUpdate) {
-      setBlocks(
-        blocks.map(block => block.id === noteBlock.id ? noteBlock : block)
-      );
+      dispatch(updateNoteBlockAction({ block: noteBlock }));
       onSaved();
     } else {
       onError("ERROR: Tried saving block with invalid ID.");

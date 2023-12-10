@@ -8,7 +8,8 @@ const CardList = (
   }
 ) => {
   return (<ul className="w-full">
-    {props.blocks.map(block => <Card block={block} onClick={props.cardOnClick} />)}
+    {props.blocks.map(block =>
+      <Card key={block.id} block={block} onClick={props.cardOnClick} />)}
   </ul>)
 }
 

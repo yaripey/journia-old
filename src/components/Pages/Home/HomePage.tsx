@@ -14,7 +14,7 @@ const HomePage = (
   }
 
   return (
-    <div className="w-full sm:w-[30rem] m-auto h-full">
+    <div className="w-full sm:w-[30rem] m-auto h-full overflow-auto">
       <CardList blocks={props.blocks} cardOnClick={handleCardClick} />
     </div>
   )
