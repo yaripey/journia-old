@@ -6,7 +6,6 @@ import EditorPage from "../Pages/Editor/EditorPage";
 const DesktopLayout = (
   props: {
     blocks: Array<ContentBlock>,
-    setBlocks: (blocks: Array<ContentBlock>) => void,
 
     createNoteBlock: (
       title: string,
@@ -35,7 +34,6 @@ const DesktopLayout = (
           <ToolBarDesktop setCurrentPage={props.setCurrentPage} />
           <HomePage
             blocks={props.blocks}
-            setBlocks={props.setBlocks}
             setCurrentPage={props.setCurrentPage}
             setEditingBlock={props.setEditingBlock}
           />

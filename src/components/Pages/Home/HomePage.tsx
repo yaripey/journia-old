@@ -4,7 +4,6 @@ import CardList from "./CardList"
 const HomePage = (
   props: {
     blocks: Array<ContentBlock>,
-    setBlocks: (blocks: Array<ContentBlock>) => void,
     setCurrentPage: (page: PageName) => void,
     setEditingBlock: React.Dispatch<ContentBlock | null>,
   }
