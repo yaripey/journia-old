@@ -42,13 +42,8 @@ const mainReducer = (
   }
 
   if (updateNoteBlockAction.match(action)) {
-    console.log("update procced");
     const newBlock = action.payload.block;
     const newBlocks = state.blocks.map(b => b.id === newBlock.id ? newBlock : b);
-    console.log(newBlock);
-
-    console.log(state.blocks);
-    console.log(newBlocks);
 
     return { ...state, blocks: newBlocks };
   }
