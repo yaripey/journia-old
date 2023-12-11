@@ -4,7 +4,7 @@ import { ContentBlock, NoteBlock } from "../../../types";
 const EditorPage = (
   props: {
     editingBlock: ContentBlock | null,
-    setEditingBlock: React.Dispatch<ContentBlock | null>,
+    setEditingBlock: React.Dispatch<ContentBlock>,
     createNoteBlock: (
       title: string,
       text: string,
@@ -41,16 +41,6 @@ const EditorPage = (
   }, [title, text, isSaving]);
 
   const saveInput = () => {
-    // // console.log("saved"); setIsSaving(false)
-    // const blockToSave: ContentBlock = props.contentBlock
-    //   ? {...props.contentBlock, title}
-    //   : {id: };
-
-    // props.saveBlock(
-    //   // {...props.editingBlock, title},
-    //   () => {setIsSaving(false)},
-    //   () => {console.log("Error"); setIsSaving(false)}
-    // );
     if (props.editingBlock) {
       if (props.editingBlock.type === "note") {
         props.updateNoteBlock(

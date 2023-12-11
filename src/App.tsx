@@ -4,7 +4,7 @@ import testData from "./testData";
 
 import DesktopLayout from "./components/Layouts/Desktop";
 import { ContentBlock, NoteBlock, PageName } from "./types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -12,13 +12,13 @@ import { useSelector } from "react-redux";
 import { MainState } from "./reducers/mainReducer";
 import { addNoteBlockAction, addNoteBlocksAction, updateNoteBlockAction } from "./reducers/blocksReducer";
 import { changePageAction } from "./reducers/pageReducer";
+import { selectEditingBlockAction } from "./reducers/editorReducer";
 
 const App = () => {
-  const [editingBlock, setEditingBlock] = useState<ContentBlock | null>(null);
-
   const dispatch = useDispatch();
   const blocks = useSelector((state: MainState) => state.blocks);
   const currentPage = useSelector((state: MainState) => state.currentPage);
+  const editingBlock = useSelector((state: MainState) => state.editingBlock);
 
   useEffect(() => {
     // Here should be initial data fetching
@@ -64,6 +64,10 @@ const App = () => {
 
   const setCurrentPage = (newPage: PageName): void => {
     dispatch(changePageAction(newPage));
+  }
+
+  const setEditingBlock = (selectedBlock: ContentBlock): void => {
+    dispatch(selectEditingBlockAction(selectedBlock));
   }
 
   return (

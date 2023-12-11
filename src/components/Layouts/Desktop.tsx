@@ -24,7 +24,7 @@ const DesktopLayout = (
     setCurrentPage: React.Dispatch<PageName>,
 
     editingBlock: ContentBlock | null,
-    setEditingBlock: React.Dispatch<ContentBlock | null>,
+    setEditingBlock: React.Dispatch<ContentBlock>,
   }
 ) => {
   switch (props.currentPage) {

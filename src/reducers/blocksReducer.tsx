@@ -14,7 +14,7 @@ export const deleteNoteBlockAction = createAction<number>("block/note/update");
 
 const blocksReducer = (
   state: BlocksState = initialState,
-  action: Action
+  action: Action,
 ): BlocksState => {
   if (addNoteBlockAction.match(action)) {
     const newNoteBlock = action.payload;
