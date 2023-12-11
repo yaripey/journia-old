@@ -1,18 +1,13 @@
 import { combineReducers } from "redux";
-import blocksReducer, { BlocksState } from "./blocksReducer";
-import pageReducer, { PageState } from "./pageReducer";
-import editingBlockReducer, { EditingBlockState } from "./editorReducer";
+import blocksReducer from "./blocksReducer";
+import pageReducer from "./pageReducer";
+import editingBlockReducer from "./editorReducer";
 
 const mainReducer = combineReducers({
   blocks: blocksReducer,
   currentPage: pageReducer,
   editingBlock: editingBlockReducer,
 });
-
-export interface MainState {
-  blocks: BlocksState,
-  currentPage: PageState,
-  editingBlock: EditingBlockState
-}
+export type MainState = ReturnType<typeof mainReducer>;
 
 export default mainReducer;
