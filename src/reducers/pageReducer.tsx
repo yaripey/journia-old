@@ -1,21 +1,19 @@
-import { Action, createAction } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { PageName } from "../types";
 
-export type PageState = PageName;
+type PageState = PageName;
 
-const initialState: PageState = "home";
+const initialState = "home" as PageState;
 
-export const changePageAction = createAction<PageName>("page/change");
-
-const pageReducer = (
-  state: PageState = initialState,
-  action: Action,
-): PageState => {
-  if (changePageAction.match(action)) {
-    return action.payload;
+const pageSlice = createSlice({
+  name: "currentPage",
+  initialState,
+  reducers: {
+    changePage(_state, action: PayloadAction<PageName>) {
+      return action.payload;
+    }
   }
+});
 
-  return state;
-}
-
-export default pageReducer;
+export const { changePage } = pageSlice.actions;
+export default pageSlice.reducer;

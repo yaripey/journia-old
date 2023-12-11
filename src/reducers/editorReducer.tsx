@@ -1,26 +1,22 @@
-import { Action, createAction } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ContentBlock } from "../types";
 
-export type EditingBlockState = ContentBlock | null;
+type EditingBlockState = ContentBlock | null;
 
-const initialState: EditingBlockState = null;
+const initialState = null as EditingBlockState;
 
-export const selectEditingBlockAction = createAction<ContentBlock>("editing/select");
-export const clearEditingBlockAction = createAction("editing/clear");
-
-const editingBlockReducer = (
-  state: EditingBlockState = initialState,
-  action: Action,
-): EditingBlockState => {
-  if (selectEditingBlockAction.match(action)) {
-    return action.payload;
+const editingBlockSlice = createSlice({
+  name: "editingBlock",
+  initialState,
+  reducers: {
+    selectEditingBlock(_state, action: PayloadAction<ContentBlock>) {
+      return action.payload;
+    },
+    clearEditingBlock() {
+      return null;
+    },
   }
+});
 
-  if (clearEditingBlockAction.match(action)) {
-    return null;
-  }
-
-  return state;
-}
-
-export default editingBlockReducer;
+export const { selectEditingBlock, clearEditingBlock } = editingBlockSlice.actions;
+export default editingBlockSlice.reducer;

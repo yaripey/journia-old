@@ -10,9 +10,9 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import { MainState } from "./reducers/mainReducer";
-import { addNoteBlockAction, addNoteBlocksAction, updateNoteBlockAction } from "./reducers/blocksReducer";
-import { changePageAction } from "./reducers/pageReducer";
-import { selectEditingBlockAction } from "./reducers/editorReducer";
+import { addNoteBlock, addNoteBlocks, updateNoteBlock } from "./reducers/blocksReducer";
+import { changePage } from "./reducers/pageReducer";
+import { selectEditingBlock } from "./reducers/editorReducer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const App = () => {
   useEffect(() => {
     // Here should be initial data fetching
     if (blocks.length === 0) {
-      dispatch(addNoteBlocksAction(testData));
+      dispatch(addNoteBlocks(testData));
     }
   }, [dispatch, blocks]);
 
@@ -42,12 +42,12 @@ const App = () => {
       type: "note",
     }
 
-    dispatch(addNoteBlockAction(newNoteBlock));
+    dispatch(addNoteBlock(newNoteBlock));
 
     onSaved(newNoteBlock);
   }
 
-  const updateNoteBlock = (
+  const saveNoteBlock = (
     noteBlock: NoteBlock,
     onSaved: () => void,
     onError: (err: string) => void,
@@ -55,7 +55,7 @@ const App = () => {
     const blockToUpdate = blocks.find(block => block.id === noteBlock.id);
 
     if (blockToUpdate) {
-      dispatch(updateNoteBlockAction(noteBlock));
+      dispatch(updateNoteBlock(noteBlock));
       onSaved();
     } else {
       onError("ERROR: Tried saving block with invalid ID.");
@@ -63,11 +63,11 @@ const App = () => {
   }
 
   const setCurrentPage = (newPage: PageName): void => {
-    dispatch(changePageAction(newPage));
+    dispatch(changePage(newPage));
   }
 
   const setEditingBlock = (selectedBlock: ContentBlock): void => {
-    dispatch(selectEditingBlockAction(selectedBlock));
+    dispatch(selectEditingBlock(selectedBlock));
   }
 
   return (
@@ -81,7 +81,7 @@ const App = () => {
       setEditingBlock={setEditingBlock}
 
       createNoteBlock={createNoteBlock}
-      updateNoteBlock={updateNoteBlock}
+      saveNoteBlock={saveNoteBlock}
     />
   )
 }

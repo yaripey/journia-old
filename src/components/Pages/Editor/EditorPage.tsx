@@ -12,7 +12,7 @@ const EditorPage = (
       // onError: (erro: string) => void,
     ) => void,
 
-    updateNoteBlock: (
+    saveNoteBlock: (
       noteBlock: NoteBlock,
       onSaved: () => void,
       onError: (err: string) => void,
@@ -43,7 +43,7 @@ const EditorPage = (
   const saveInput = () => {
     if (props.editingBlock) {
       if (props.editingBlock.type === "note") {
-        props.updateNoteBlock(
+        props.saveNoteBlock(
           {...props.editingBlock, title, text},
           () => {setIsSaving(false)},
           (err: string) => {console.log(err); setIsSaving(false)}

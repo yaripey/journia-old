@@ -14,7 +14,7 @@ const DesktopLayout = (
       // onError: (erro: string) => void,
     ) => void,
 
-    updateNoteBlock: (
+    saveNoteBlock: (
       noteBlock: NoteBlock,
       onSaved: () => void,
       onError: (err: string) => void,
@@ -48,7 +48,7 @@ const DesktopLayout = (
             editingBlock={props.editingBlock}
             setEditingBlock={props.setEditingBlock}
             createNoteBlock={props.createNoteBlock}
-            updateNoteBlock={props.updateNoteBlock}
+            saveNoteBlock={props.saveNoteBlock}
           />
         </div>
       )

@@ -1,43 +1,31 @@
-import { Action } from "redux";
-import { createAction } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ContentBlock, NoteBlock } from "../types";
 
-import { ContentBlock } from "../types";
+type BlocksState = ContentBlock[];
 
-export type BlocksState = ContentBlock[];
+const initialState = [] as BlocksState;
 
-const initialState: BlocksState = [];
+const blocksSlice = createSlice({
+  name: "blocks",
+  initialState,
+  reducers: {
+    addNoteBlock(state, action: PayloadAction<NoteBlock>) {
+      return [...state, action.payload];
+    },
+    addNoteBlocks(state, action: PayloadAction<NoteBlock[]>) {
+      return [...state, ...action.payload];
+    },
+    updateNoteBlock(state, action: PayloadAction<NoteBlock>) {
+      const updatedBlock = action.payload;
+      const blockToChange = state.find(b => b.id === updatedBlock.id);
 
-export const addNoteBlockAction = createAction<ContentBlock>("block/note/add");
-export const addNoteBlocksAction = createAction<ContentBlock[]>("block/note/addMany");
-export const updateNoteBlockAction = createAction<ContentBlock>("block/note/update");
-export const deleteNoteBlockAction = createAction<number>("block/note/update");
+      if (blockToChange) {
+        return state.map(b => b.id !== updatedBlock.id ? updatedBlock : b);
+      }
 
-const blocksReducer = (
-  state: BlocksState = initialState,
-  action: Action,
-): BlocksState => {
-  if (addNoteBlockAction.match(action)) {
-    const newNoteBlock = action.payload;
-    const newBlocks = [...state, newNoteBlock];
-
-    return newBlocks;
+      return state;
+    }
   }
-
-  if (addNoteBlocksAction.match(action)) {
-    const newNoteBlocks = action.payload;
-    const newBlocks = [...state, ...newNoteBlocks];
-
-    return newBlocks;
-  }
-
-  if (updateNoteBlockAction.match(action)) {
-    const newBlock = action.payload;
-    const newBlocks = state.map(b => b.id === newBlock.id ? newBlock : b);
-
-    return newBlocks;
-  }
-
-  return state;
-}
-
-export default blocksReducer;
+});
+export const { addNoteBlock, addNoteBlocks, updateNoteBlock } = blocksSlice.actions;
+export default blocksSlice.reducer;
