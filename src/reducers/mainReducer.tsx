@@ -1,54 +1,15 @@
-import { Action } from "redux";
-import { createAction } from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
+import blocksReducer, { BlocksState } from "./blocksReducer";
+import pageReducer, { PageState } from "./pageReducer";
 
-import { ContentBlock } from "../types";
+const mainReducer = combineReducers({
+  blocks: blocksReducer,
+  currentPage: pageReducer,
+});
 
-export interface State {
-  blocks: ContentBlock[],
-}
-
-const initialState: State = {
-  blocks: [],
-}
-
-export const addNoteBlockAction =
-  createAction<{ block: ContentBlock }>("blocks/note/add");
-
-export const addNoteBlocksAction =
-  createAction<{ blocks: ContentBlock[] }>("block/note/addMany");
-
-export const updateNoteBlockAction =
-  createAction<{ block: ContentBlock }>("block/note/update");
-
-export const deleteNoteBlockAction =
-  createAction<{ id: number }>("block/note/update");
-
-const mainReducer = (
-  state: State = initialState,
-  action: Action
-): State => {
-  if (addNoteBlockAction.match(action)) {
-    const newNoteBlock = action.payload.block;
-    const newBlocks = [...state.blocks, newNoteBlock];
-
-    return { ...state, blocks: newBlocks };
-  }
-
-  if (addNoteBlocksAction.match(action)) {
-    const newNoteBlocks = action.payload.blocks;
-    const newBlocks = [...state.blocks, ...newNoteBlocks];
-
-    return { ...state, blocks: newBlocks };
-  }
-
-  if (updateNoteBlockAction.match(action)) {
-    const newBlock = action.payload.block;
-    const newBlocks = state.blocks.map(b => b.id === newBlock.id ? newBlock : b);
-
-    return { ...state, blocks: newBlocks };
-  }
-
-  return state;
+export interface MainState {
+  blocks: BlocksState,
+  currentPage: PageState,
 }
 
 export default mainReducer;
