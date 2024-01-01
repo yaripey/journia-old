@@ -21,10 +21,10 @@ const DesktopLayout = (
     ) => void,
 
     currentPage: PageName,
-    setCurrentPage: React.Dispatch<PageName>,
+    setCurrentPage: (name: PageName) => void,
 
     editingBlock: ContentBlock | null,
-    setEditingBlock: React.Dispatch<ContentBlock>,
+    setEditingBlock: (block: ContentBlock) => void,
   }
 ) => {
   switch (props.currentPage) {

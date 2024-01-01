@@ -9,7 +9,7 @@ interface NavButton {
 
 export const ToolBarDesktop = (
   props: {
-    setCurrentPage: React.Dispatch<PageName>,
+    setCurrentPage: (name: PageName) => void,
   }
 ) => {
   const openEditorWithNewBlock = () => {

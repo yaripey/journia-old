@@ -5,7 +5,7 @@ const HomePage = (
   props: {
     blocks: Array<ContentBlock>,
     setCurrentPage: (page: PageName) => void,
-    setEditingBlock: React.Dispatch<ContentBlock>,
+    setEditingBlock: (block: ContentBlock) => void,
   }
 ) => {
   const handleCardClick = (block: ContentBlock): void => {
