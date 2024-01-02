@@ -7,7 +7,7 @@ interface NavButton {
   onClick: () => void,
 }
 
-export const ToolBarDesktop = (
+export const ToolBar = (
   props: {
     setCurrentPage: (name: PageName) => void,
   }

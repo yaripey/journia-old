@@ -2,10 +2,12 @@ import "./main.css";
 
 import testData from "./testData";
 
-import DesktopLayout from "./components/Layouts/Desktop";
 import { ContentBlock, NoteBlock, PageName } from "./types";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import { ToolBar } from "./components/Common/ToolBar";
+import HomePage from "./components/Pages/Home/HomePage";
+import EditorPage from "./components/Pages/Editor/EditorPage";
 
 const App = () => {
   const [blocks, setBlocks] = useState<ContentBlock[]>([]);
@@ -53,20 +55,40 @@ const App = () => {
     }
   }
 
-  return (
-    <DesktopLayout
-      blocks={blocks}
+  switch (currentPage) {
+    case "home":
+      return (
+        <div className="h-full w-full flex flex-row overflow-hidden">
+          <ToolBar setCurrentPage={setCurrentPage} />
+          <HomePage
+            blocks={blocks}
+            setCurrentPage={setCurrentPage}
+            setEditingBlock={setEditingBlock}
+          />
+        </div>
+      )
 
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}
+    case "editor":
+      return (
+        <div className="h-full w-full flex flex-row overflow-hidden">
+          <ToolBar setCurrentPage={setCurrentPage} />
+          <EditorPage
+            editingBlock={editingBlock}
+            setEditingBlock={setEditingBlock}
+            createNoteBlock={createNoteBlock}
+            saveNoteBlock={saveNoteBlock}
+          />
+        </div>
+      )
 
-      editingBlock={editingBlock}
-      setEditingBlock={setEditingBlock}
-
-      createNoteBlock={createNoteBlock}
-      saveNoteBlock={saveNoteBlock}
-    />
-  )
+    case "search":
+      return (
+        <div className="h-full w-full flex flex-row overflow-hidden">
+          <ToolBar setCurrentPage={setCurrentPage} />
+          <div>Hey its a search</div>
+        </div>
+      )
+  }
 }
 
 export default App;
