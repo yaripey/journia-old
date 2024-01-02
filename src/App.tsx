@@ -4,28 +4,20 @@ import testData from "./testData";
 
 import DesktopLayout from "./components/Layouts/Desktop";
 import { ContentBlock, NoteBlock, PageName } from "./types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-
-import { MainState } from "./reducers/mainReducer";
-import { addNoteBlock, addNoteBlocks, updateNoteBlock } from "./reducers/blocksReducer";
-import { changePage } from "./reducers/pageReducer";
-import { selectEditingBlock } from "./reducers/editorReducer";
 
 const App = () => {
-  const dispatch = useDispatch();
-  const blocks = useSelector((state: MainState) => state.blocks);
-  const currentPage = useSelector((state: MainState) => state.currentPage);
-  const editingBlock = useSelector((state: MainState) => state.editingBlock);
+  const [blocks, setBlocks] = useState<ContentBlock[]>([]);
+  const [currentPage, setCurrentPage] = useState<PageName>("home");
+  const [editingBlock, setEditingBlock] = useState<ContentBlock | null>(null);
 
   useEffect(() => {
     // Here should be initial data fetching
     if (blocks.length === 0) {
-      dispatch(addNoteBlocks(testData));
+      setBlocks(testData);
     }
-  }, [dispatch, blocks]);
+  }, [blocks]);
 
   const createNoteBlock = (
     title: string,
@@ -42,8 +34,7 @@ const App = () => {
       type: "note",
     }
 
-    dispatch(addNoteBlock(newNoteBlock));
-
+    setBlocks([...blocks, newNoteBlock]);
     onSaved(newNoteBlock);
   }
 
@@ -55,19 +46,11 @@ const App = () => {
     const blockToUpdate = blocks.find(block => block.id === noteBlock.id);
 
     if (blockToUpdate) {
-      dispatch(updateNoteBlock(noteBlock));
+      setBlocks(blocks.map(b => b.id === blockToUpdate.id ? blockToUpdate : b));
       onSaved();
     } else {
       onError("ERROR: Tried saving block with invalid ID.");
     }
-  }
-
-  const setCurrentPage = (newPage: PageName): void => {
-    dispatch(changePage(newPage));
-  }
-
-  const setEditingBlock = (selectedBlock: ContentBlock): void => {
-    dispatch(selectEditingBlock(selectedBlock));
   }
 
   return (
