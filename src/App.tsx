@@ -45,10 +45,11 @@ const App = () => {
     onSaved: () => void,
     onError: (err: string) => void,
   ): void => {
+    console.log(noteBlock)
     const blockToUpdate = blocks.find(block => block.id === noteBlock.id);
 
     if (blockToUpdate) {
-      setBlocks(blocks.map(b => b.id === blockToUpdate.id ? blockToUpdate : b));
+      setBlocks(blocks.map(b => b.id === noteBlock.id ? noteBlock : b));
       onSaved();
     } else {
       onError("ERROR: Tried saving block with invalid ID.");

@@ -19,59 +19,37 @@ const EditorPage = (
     ) => void,
   }
 ) => {
-  const [isSaving, setIsSaving] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(
     props.editingBlock ? props.editingBlock.title : ""
   );
   const [text, setText] = useState<string>("This one is not connected yet");
 
-  useEffect(() => {
-    let saveTimer: number;
-
-    if (!isSaving) {
-      saveTimer = setTimeout(() => {
-        setIsSaving(true);
-        saveInput();
-      }, 3000);
-    }
-
-    return () => {
-      clearTimeout(saveTimer);
-    }
-  }, [title, text, isSaving]);
-
-  const saveInput = () => {
-    if (props.editingBlock) {
-      if (props.editingBlock.type === "note") {
-        props.saveNoteBlock(
-          { ...props.editingBlock, title, text },
-          () => { setIsSaving(false) },
-          (err: string) => { console.log(err); setIsSaving(false) }
-        )
-      }
-    } else {
-      props.createNoteBlock(
-        title,
-        text,
-        (newBlock) => { console.log(newBlock); setIsSaving(false) },
-        // (err) => {console.log(err); setIsSaving(false)}
-      )
-    }
-  };
-
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
-    setIsSaving(false);
   }
 
   const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
-    setIsSaving(false);
+  }
+
+  const handleSave = () => {
+    if (props.editingBlock === null) {
+      props.createNoteBlock(title, text, () => console.log("Block created"));
+    } else {
+      if (props.editingBlock.type === "note") {
+        props.saveNoteBlock(
+          { ...props.editingBlock, title, text },
+          () => console.log("Block updated"),
+          (err) => console.log(err)
+        );
+      }
+    }
   }
 
   return (
     <div className="w-full sm:w-[30rem] m-auto h-full">
       <form className="flex flex-col w-full h-full">
+        <button onClick={handleSave} type="button">Save</button>
         <input
           type="title"
           className="placeholder:test focus:outline-none text-lg"
