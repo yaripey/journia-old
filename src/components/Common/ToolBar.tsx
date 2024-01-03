@@ -7,6 +7,17 @@ interface ToolBarButton {
   iconFileName: string,
 }
 
+const ToolBarContainer = styled.div`
+  display: flex;
+  justify-content: between;
+  flex-direction: column;
+
+  width: 50px;
+  height: 100%;
+
+  color: white;
+`;
+
 export const ToolBar = (
   props: {
     setCurrentPage: (name: PageName) => void,
@@ -25,17 +36,6 @@ export const ToolBar = (
     },
   ];
 
-  const ToolBarContainer = styled.div`
-    display: flex;
-    justify-content: between;
-    flex-direction: column;
-
-    width: 50px;
-    height: 100%;
-
-    color: white;
-  `;
-
   return (
     <ToolBarContainer>
       {buttons.map(({ iconFileName, name, onClick }) =>
@@ -49,32 +49,32 @@ export const ToolBar = (
   )
 }
 
+const NavBarButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50px;
+  height: 50px;
+
+  background-color: white;
+
+  &:hover {
+    background-color: grey;
+  }
+`;
+
+const ButtonImg = styled.img`
+  width: 25px;
+  height: 25px;
+`;
+
 const ToolBarButton = (
   props: {
     iconFileName: string,
     onClick: () => void,
   }
 ) => {
-  const NavBarButton = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 50px;
-    height: 50px;
-
-    background-color: white;
-
-    &:hover {
-      background-color: grey;
-    }
-  `;
-
-  const ButtonImg = styled.img`
-    width: 25px;
-    height: 25px;
-  `;
-
   return (
     <NavBarButton onClick={props.onClick}>
       <ButtonImg src={props.iconFileName} />

@@ -45,7 +45,6 @@ const App = () => {
     onSaved: () => void,
     onError: (err: string) => void,
   ): void => {
-    console.log(noteBlock)
     const blockToUpdate = blocks.find(block => block.id === noteBlock.id);
 
     if (blockToUpdate) {
@@ -75,9 +74,10 @@ const App = () => {
           <ToolBar setCurrentPage={setCurrentPage} />
           <EditorPage
             editingBlock={editingBlock}
-            setEditingBlock={setEditingBlock}
+            resetEditingBlock={() => setEditingBlock(null)}
             createNoteBlock={createNoteBlock}
             saveNoteBlock={saveNoteBlock}
+            setCurrentPage={setCurrentPage}
           />
         </div>
       )

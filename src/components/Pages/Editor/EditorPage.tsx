@@ -1,15 +1,41 @@
 import { ChangeEvent, useState } from "react";
-import { ContentBlock, NoteBlock } from "../../../types";
+import { ContentBlock, NoteBlock, PageName } from "../../../types"
+import styled from "styled-components";
 
-const EditorPage = (
+const StyledForm = styled.form`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledTitleInput = styled.input`
+  font-size: 16px;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const StyledTextArea = styled.textarea`
+  height: 100%;
+
+  resize: none;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const NoteEditor = (
   props: {
-    editingBlock: ContentBlock | null,
-    setEditingBlock: (block: ContentBlock) => void,
+    editingNote: NoteBlock,
     createNoteBlock: (
       title: string,
       text: string,
       onSaved: (newNoteBlock: NoteBlock) => void,
-      // onError: (erro: string) => void,
     ) => void,
 
     saveNoteBlock: (
@@ -17,55 +43,96 @@ const EditorPage = (
       onSaved: () => void,
       onError: (err: string) => void,
     ) => void,
+
+    closeEditor: () => void,
   }
 ) => {
-  const [title, setTitle] = useState<string>(
-    props.editingBlock ? props.editingBlock.title : ""
-  );
-  const [text, setText] = useState<string>("This one is not connected yet");
+  const [title, setTitle] = useState<string>(props.editingNote.title);
+  const [text, setText] = useState<string>(props.editingNote.text);
 
-  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) =>
     setTitle(event.target.value);
-  }
-
-  const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) =>
     setText(event.target.value);
-  }
 
   const handleSave = () => {
-    if (props.editingBlock === null) {
-      props.createNoteBlock(title, text, () => console.log("Block created"));
-    } else {
-      if (props.editingBlock.type === "note") {
-        props.saveNoteBlock(
-          { ...props.editingBlock, title, text },
-          () => console.log("Block updated"),
-          (err) => console.log(err)
-        );
-      }
-    }
-  }
+    props.saveNoteBlock(
+      { ...props.editingNote, title, text },
+      () => console.log("Block updated"),
+      (err) => console.log(err)
+    );
+    props.closeEditor();
+  };
 
   return (
-    <div className="w-full sm:w-[30rem] m-auto h-full">
-      <form className="flex flex-col w-full h-full">
-        <button onClick={handleSave} type="button">Save</button>
-        <input
-          type="title"
-          className="placeholder:test focus:outline-none text-lg"
-          placeholder="Note title..."
-          value={title}
-          onChange={handleTitleChange}
-        />
-        <textarea
-          className="border-none resize-none h-full focus:outline-none"
-          placeholder="Note text..."
-          value={text}
-          onChange={handleTextChange}
-        ></textarea>
-      </form>
-    </div>
-  )
+    <StyledForm>
+      <button type="button" onClick={handleSave}>Save</button>
+      <StyledTitleInput
+        type="title"
+        placeholder="Note title..."
+        value={title}
+        onChange={handleTitleChange}
+      />
+      <StyledTextArea
+        placeholder="Note text..."
+        value={text}
+        onChange={handleTextChange}
+      />
+    </StyledForm>
+  );
+}
+
+const EditorPageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+
+  margin: auto;
+`;
+
+const EditorPage = (
+  props: {
+    editingBlock: ContentBlock | null,
+    createNoteBlock: (
+      title: string,
+      text: string,
+      onSaved: (newNoteBlock: NoteBlock) => void,
+    ) => void,
+
+    saveNoteBlock: (
+      noteBlock: NoteBlock,
+      onSaved: () => void,
+      onError: (err: string) => void,
+    ) => void,
+
+    resetEditingBlock: () => void,
+    setCurrentPage: (pageName: PageName) => void,
+  }
+) => {
+  if (props.editingBlock === null) return (
+    <div>Error, no block chosen.</div>
+  );
+
+  const closeEditor = () => {
+    props.resetEditingBlock();
+    props.setCurrentPage("home");
+  }
+
+  switch (props.editingBlock.type) {
+    case "note":
+      return (
+        <EditorPageContainer>
+          <NoteEditor
+            editingNote={props.editingBlock}
+            saveNoteBlock={props.saveNoteBlock}
+            createNoteBlock={props.createNoteBlock}
+            closeEditor={closeEditor}
+          />
+        </EditorPageContainer>
+      )
+
+    case "todo":
+      return <div>No todo editor for now</div>
+  }
 }
 
 export default EditorPage;
