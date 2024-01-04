@@ -21,7 +21,6 @@ const BlockTypeSelector = (
     createdAt: Date.now(),
     lastEditedAt: Date.now(),
     isDone: false,
-    subTodos: [],
     title: "",
   });
 
