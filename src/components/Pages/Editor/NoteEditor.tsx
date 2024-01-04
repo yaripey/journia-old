@@ -54,6 +54,7 @@ const NoteEditor = (
         (err) => console.log(err)
       );
     }
+
     props.closeEditor();
   };
 

@@ -10,16 +10,10 @@ export interface NoteBlock extends Block {
   title: string,
 }
 
-export interface SubTodo {
-  text: string,
-  isDone: boolean,
-}
-
 export interface TodoBlock extends Block {
   type: "todo",
   title: string,
   isDone: boolean,
-  subTodos: Array<SubTodo>,
 }
 
 export type PageName = "home" | "search" | "editor";

@@ -1,7 +1,8 @@
-import { ContentBlock, NoteBlock, PageName } from "../../../types"
+import { ContentBlock, NoteBlock, PageName, TodoBlock } from "../../../types"
 import styled from "styled-components";
 import BlockTypeSelector from "./BlockTypeSelector";
 import NoteEditor from "./NoteEditor";
+import TodoEditor from "./TodoEditor";
 
 const EditorPageContainer = styled.div`
   width: 100%;
@@ -13,6 +14,7 @@ const EditorPageContainer = styled.div`
 const EditorPage = (
   props: {
     editingBlock: ContentBlock | null,
+
     createNoteBlock: (
       title: string,
       text: string,
@@ -21,6 +23,18 @@ const EditorPage = (
 
     saveNoteBlock: (
       noteBlock: NoteBlock,
+      onSaved: () => void,
+      onError: (err: string) => void,
+    ) => void,
+
+    createTodoBlock: (
+      title: string,
+      isDone: boolean,
+      onSaved: (newTodoBlock: TodoBlock) => void,
+    ) => void,
+
+    saveTodoBlock: (
+      title: TodoBlock,
       onSaved: () => void,
       onError: (err: string) => void,
     ) => void,
@@ -53,7 +67,16 @@ const EditorPage = (
       )
 
     case "todo":
-      return <div>No todo editor for now</div>
+      return (
+        <EditorPageContainer>
+          <TodoEditor
+            editingTodo={props.editingBlock}
+            createTodoBlock={props.createTodoBlock}
+            saveTodoBlock={props.saveTodoBlock}
+            closeEditor={closeEditor}
+          />
+        </EditorPageContainer>
+      )
   }
 }
 

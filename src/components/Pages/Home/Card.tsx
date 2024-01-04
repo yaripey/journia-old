@@ -1,6 +1,31 @@
 import { makeDateReadable } from "../../../utils";
 
-import { ContentBlock } from "../../../types"
+import { ContentBlock, NoteBlock, TodoBlock } from "../../../types"
+
+const NoteCard = (
+  props: {
+    note: NoteBlock,
+  },
+) => {
+  return (
+    <div>
+      <p>{props.note.title}</p>
+      <p>{props.note.text}</p>
+    </div>
+  )
+}
+
+const TodoCard = (
+  props: {
+    todo: TodoBlock,
+  },
+) => {
+  return (
+    <div>
+      <p><input type="checkbox" checked={props.todo.isDone} /> {props.todo.title}</p>
+    </div>
+  )
+}
 
 export const Card = (
   props: {
@@ -14,7 +39,11 @@ export const Card = (
       onClick={() => props.onClick(props.block)}
     >
       <p className="text-sm">{makeDateReadable(props.block.createdAt)}</p>
-      <p>{props.block.title}</p>
+      {
+        props.block.type === "note"
+          ? <NoteCard note={props.block} />
+          : <TodoCard todo={props.block} />
+      }
     </li>
   )
 }
