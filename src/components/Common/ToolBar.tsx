@@ -21,6 +21,7 @@ const ToolBarContainer = styled.div`
 export const ToolBar = (
   props: {
     setCurrentPage: (name: PageName) => void,
+    resetEditingBlock: () => void,
   }
 ) => {
   const buttons: ToolBarButton[] = [
@@ -31,7 +32,10 @@ export const ToolBar = (
     },
     {
       name: "create",
-      onClick: () => props.setCurrentPage("editor"),
+      onClick: () => {
+        props.resetEditingBlock();
+        props.setCurrentPage("editor");
+      },
       iconFileName: "src/assets/icons/create.png"
     },
   ];

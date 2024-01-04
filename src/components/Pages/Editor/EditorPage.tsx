@@ -56,11 +56,19 @@ const NoteEditor = (
     setText(event.target.value);
 
   const handleSave = () => {
-    props.saveNoteBlock(
-      { ...props.editingNote, title, text },
-      () => console.log("Block updated"),
-      (err) => console.log(err)
-    );
+    if (props.editingNote.id === null) {
+      props.createNoteBlock(
+        title,
+        text,
+        () => console.log("Note created"),
+      );
+    } else {
+      props.saveNoteBlock(
+        { ...props.editingNote, title, text },
+        () => console.log("Block updated"),
+        (err) => console.log(err)
+      );
+    }
     props.closeEditor();
   };
 
@@ -89,6 +97,39 @@ const EditorPageContainer = styled.div`
   margin: auto;
 `;
 
+const BlockTypeSelector = (
+  props: {
+    setEditingBlock: (block: ContentBlock) => void,
+  },
+) => {
+
+  const createNote = () => props.setEditingBlock({
+    type: "note",
+    id: null,
+    createdAt: Date.now(),
+    lastEditedAt: Date.now(),
+    text: "",
+    title: "",
+  });
+
+  const createTodo = () => props.setEditingBlock({
+    type: "todo",
+    id: null,
+    createdAt: Date.now(),
+    lastEditedAt: Date.now(),
+    isDone: false,
+    subTodos: [],
+    title: "",
+  });
+
+  return (
+    <ul>
+      <li><button onClick={createNote}>Note</button></li>
+      <li><button onClick={createTodo}>Todo</button></li>
+    </ul>
+  )
+}
+
 const EditorPage = (
   props: {
     editingBlock: ContentBlock | null,
@@ -105,11 +146,12 @@ const EditorPage = (
     ) => void,
 
     resetEditingBlock: () => void,
+    setEditingBlock: (block: ContentBlock) => void,
     setCurrentPage: (pageName: PageName) => void,
   }
 ) => {
   if (props.editingBlock === null) return (
-    <div>Error, no block chosen.</div>
+    <BlockTypeSelector setEditingBlock={props.setEditingBlock} />
   );
 
   const closeEditor = () => {

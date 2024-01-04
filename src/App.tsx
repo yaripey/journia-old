@@ -54,12 +54,16 @@ const App = () => {
       onError("ERROR: Tried saving block with invalid ID.");
     }
   }
+  const resetEditingBlock = () => setEditingBlock(null);
 
   switch (currentPage) {
     case "home":
       return (
         <div className="h-full w-full flex flex-row overflow-hidden">
-          <ToolBar setCurrentPage={setCurrentPage} />
+          <ToolBar
+            setCurrentPage={setCurrentPage}
+            resetEditingBlock={resetEditingBlock}
+          />
           <HomePage
             blocks={blocks}
             setCurrentPage={setCurrentPage}
@@ -71,13 +75,17 @@ const App = () => {
     case "editor":
       return (
         <div className="h-full w-full flex flex-row overflow-hidden">
-          <ToolBar setCurrentPage={setCurrentPage} />
+          <ToolBar
+            setCurrentPage={setCurrentPage}
+            resetEditingBlock={resetEditingBlock}
+          />
           <EditorPage
             editingBlock={editingBlock}
-            resetEditingBlock={() => setEditingBlock(null)}
+            resetEditingBlock={resetEditingBlock}
             createNoteBlock={createNoteBlock}
             saveNoteBlock={saveNoteBlock}
             setCurrentPage={setCurrentPage}
+            setEditingBlock={setEditingBlock}
           />
         </div>
       )
@@ -85,7 +93,10 @@ const App = () => {
     case "search":
       return (
         <div className="h-full w-full flex flex-row overflow-hidden">
-          <ToolBar setCurrentPage={setCurrentPage} />
+          <ToolBar
+            setCurrentPage={setCurrentPage}
+            resetEditingBlock={resetEditingBlock}
+          />
           <div>Hey its a search</div>
         </div>
       )
