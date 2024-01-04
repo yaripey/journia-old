@@ -1,94 +1,7 @@
-import { ChangeEvent, useState } from "react";
 import { ContentBlock, NoteBlock, PageName } from "../../../types"
 import styled from "styled-components";
-
-const StyledForm = styled.form`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledTitleInput = styled.input`
-  font-size: 16px;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-const StyledTextArea = styled.textarea`
-  height: 100%;
-
-  resize: none;
-  border: none;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-const NoteEditor = (
-  props: {
-    editingNote: NoteBlock,
-    createNoteBlock: (
-      title: string,
-      text: string,
-      onSaved: (newNoteBlock: NoteBlock) => void,
-    ) => void,
-
-    saveNoteBlock: (
-      noteBlock: NoteBlock,
-      onSaved: () => void,
-      onError: (err: string) => void,
-    ) => void,
-
-    closeEditor: () => void,
-  }
-) => {
-  const [title, setTitle] = useState<string>(props.editingNote.title);
-  const [text, setText] = useState<string>(props.editingNote.text);
-
-  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setTitle(event.target.value);
-  const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) =>
-    setText(event.target.value);
-
-  const handleSave = () => {
-    if (props.editingNote.id === null) {
-      props.createNoteBlock(
-        title,
-        text,
-        () => console.log("Note created"),
-      );
-    } else {
-      props.saveNoteBlock(
-        { ...props.editingNote, title, text },
-        () => console.log("Block updated"),
-        (err) => console.log(err)
-      );
-    }
-    props.closeEditor();
-  };
-
-  return (
-    <StyledForm>
-      <button type="button" onClick={handleSave}>Save</button>
-      <StyledTitleInput
-        type="title"
-        placeholder="Note title..."
-        value={title}
-        onChange={handleTitleChange}
-      />
-      <StyledTextArea
-        placeholder="Note text..."
-        value={text}
-        onChange={handleTextChange}
-      />
-    </StyledForm>
-  );
-}
+import BlockTypeSelector from "./BlockTypeSelector";
+import NoteEditor from "./NoteEditor";
 
 const EditorPageContainer = styled.div`
   width: 100%;
@@ -96,39 +9,6 @@ const EditorPageContainer = styled.div`
 
   margin: auto;
 `;
-
-const BlockTypeSelector = (
-  props: {
-    setEditingBlock: (block: ContentBlock) => void,
-  },
-) => {
-
-  const createNote = () => props.setEditingBlock({
-    type: "note",
-    id: null,
-    createdAt: Date.now(),
-    lastEditedAt: Date.now(),
-    text: "",
-    title: "",
-  });
-
-  const createTodo = () => props.setEditingBlock({
-    type: "todo",
-    id: null,
-    createdAt: Date.now(),
-    lastEditedAt: Date.now(),
-    isDone: false,
-    subTodos: [],
-    title: "",
-  });
-
-  return (
-    <ul>
-      <li><button onClick={createNote}>Note</button></li>
-      <li><button onClick={createTodo}>Todo</button></li>
-    </ul>
-  )
-}
 
 const EditorPage = (
   props: {
