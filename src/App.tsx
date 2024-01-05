@@ -88,7 +88,6 @@ const App = () => {
     }
   }
 
-
   const resetEditingBlock = () => setEditingBlock(null);
 
   switch (currentPage) {
@@ -103,6 +102,7 @@ const App = () => {
             blocks={blocks}
             setCurrentPage={setCurrentPage}
             setEditingBlock={setEditingBlock}
+            updateTodo={saveTodoBlock}
           />
         </div>
       )

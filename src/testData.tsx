@@ -1,6 +1,6 @@
-import { NoteBlock } from "./types";
+import { ContentBlock } from "./types";
 
-const testData: Array<NoteBlock> = [
+const testData: ContentBlock[] = [
   {
     id: "1",
     title: "Test title",
@@ -17,24 +17,14 @@ const testData: Array<NoteBlock> = [
     lastEditedAt: Date.now(),
     type: "note",
   },
-  // {
-  //   id: "3",
-  //   type: "todo",
-  //   title: "This is a super todo",
-  //   subTodos: [
-  //     {
-  //       text: "First subtodo",
-  //       isDone: false,
-  //     },
-  //     {
-  //       text: "Another subtodo",
-  //       isDone: true,
-  //     },
-  //   ],
-  //   isDone: false,
-  //   createdAt: Date.now(),
-  //   lastEditedAt: Date.now(),
-  // },
+  {
+    id: "3",
+    type: "todo",
+    title: "This is a super todo",
+    isDone: false,
+    createdAt: Date.now(),
+    lastEditedAt: Date.now(),
+  },
   {
     id: "4",
     title: "Test title",
