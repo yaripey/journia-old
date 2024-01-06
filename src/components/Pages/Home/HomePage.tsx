@@ -14,7 +14,6 @@ const HomePage = (
   }
 ) => {
   const handleCardClick = (block: ContentBlock): void => {
-    console.log("Homepage event procced");
     props.setEditingBlock(block);
     props.setCurrentPage("editor");
   }

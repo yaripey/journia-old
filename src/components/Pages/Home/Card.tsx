@@ -27,7 +27,6 @@ const TodoCard = (
   },
 ) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log("Tick event procced")
     event.stopPropagation();
 
     props.updateTodo(
@@ -69,7 +68,7 @@ export const Card = (
   return (
     <li
       className="p-3 cursor-pointer hover:bg-gray-400"
-      onClick={() => { console.log("li onclick"); props.onClick(props.block) }}
+      onClick={() => props.onClick(props.block)}
     >
       <p className="text-sm">{makeDateReadable(props.block.createdAt)}</p>
       {
