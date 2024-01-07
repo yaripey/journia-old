@@ -13,7 +13,7 @@ const HomePage = (
     ) => void,
   }
 ) => {
-  const handleCardClick = (block: ContentBlock): void => {
+  const openBlockInEditor = (block: ContentBlock): void => {
     props.setEditingBlock(block);
     props.setCurrentPage("editor");
   }
@@ -22,7 +22,7 @@ const HomePage = (
     <div className="w-full sm:w-[30rem] m-auto h-full overflow-auto">
       <CardList
         blocks={props.blocks}
-        cardOnClick={handleCardClick}
+        openBlockInEditor={openBlockInEditor}
         updateTodo={props.updateTodo}
       />
     </div>

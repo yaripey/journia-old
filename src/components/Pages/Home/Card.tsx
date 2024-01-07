@@ -57,7 +57,7 @@ const TodoCard = (
 export const Card = (
   props: {
     block: ContentBlock,
-    onClick: (block: ContentBlock) => void,
+    openBlockInEditor: (block: ContentBlock) => void,
     updateTodo: (
       todo: TodoBlock,
       onDone: () => void,
@@ -67,10 +67,10 @@ export const Card = (
 ) => {
   return (
     <li
-      className="p-3 cursor-pointer hover:bg-gray-400"
-      onClick={() => props.onClick(props.block)}
+      className="p-3 hover:bg-gray-400"
     >
       <p className="text-sm">{makeDateReadable(props.block.createdAt)}</p>
+      <button onClick={() => props.openBlockInEditor(props.block)}>Edit</button>
       {
         props.block.type === "note"
           ? <NoteCard note={props.block} />
