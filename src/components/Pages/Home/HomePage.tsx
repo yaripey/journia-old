@@ -11,6 +11,11 @@ const HomePage = (
       onDone: () => void,
       onError: (err: string) => void,
     ) => void,
+    deleteBlock: (
+      block: ContentBlock,
+      onDone: () => void,
+      onError: (err: string) => void,
+    ) => void,
   }
 ) => {
   const openBlockInEditor = (block: ContentBlock): void => {
@@ -24,6 +29,7 @@ const HomePage = (
         blocks={props.blocks}
         openBlockInEditor={openBlockInEditor}
         updateTodo={props.updateTodo}
+        deleteBlock={props.deleteBlock}
       />
     </div>
   )

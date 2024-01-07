@@ -88,6 +88,21 @@ const App = () => {
     }
   }
 
+  const deleteBlock = (
+    block: ContentBlock,
+    onDone: () => void,
+    onError: (err: string) => void,
+  ): void => {
+    const blockToDelete = blocks.find(block => block.id === block.id);
+
+    if (blockToDelete) {
+      setBlocks(blocks.filter(b => b.id !== block.id));
+      onDone();
+    } else {
+      onError("ERROR: Tried to delete nonexisting block.");
+    }
+  }
+
   const resetEditingBlock = () => setEditingBlock(null);
 
   switch (currentPage) {
@@ -103,6 +118,7 @@ const App = () => {
             setCurrentPage={setCurrentPage}
             setEditingBlock={setEditingBlock}
             updateTodo={saveTodoBlock}
+            deleteBlock={deleteBlock}
           />
         </div>
       )

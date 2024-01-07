@@ -63,6 +63,11 @@ export const Card = (
       onDone: () => void,
       onError: (err: string) => void,
     ) => void,
+    deleteBlock: (
+      block: ContentBlock,
+      onDone: () => void,
+      onError: (err: string) => void,
+    ) => void,
   }
 ) => {
   return (
@@ -71,6 +76,7 @@ export const Card = (
     >
       <p className="text-sm">{makeDateReadable(props.block.createdAt)}</p>
       <button onClick={() => props.openBlockInEditor(props.block)}>Edit</button>
+      <button onClick={() => props.deleteBlock(props.block, () => console.log("block deleted"), (err) => console.log(err))}>Delete</button>
       {
         props.block.type === "note"
           ? <NoteCard note={props.block} />

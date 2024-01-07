@@ -10,6 +10,11 @@ const CardList = (
       onDone: () => void,
       onError: (err: string) => void,
     ) => void,
+    deleteBlock: (
+      block: ContentBlock,
+      onDone: () => void,
+      onError: (err: string) => void,
+    ) => void,
   }
 ) => {
   return (<ul className="w-full">
@@ -19,6 +24,7 @@ const CardList = (
         block={block}
         openBlockInEditor={props.openBlockInEditor}
         updateTodo={props.updateTodo}
+        deleteBlock={props.deleteBlock}
       />)}
   </ul>)
 }
