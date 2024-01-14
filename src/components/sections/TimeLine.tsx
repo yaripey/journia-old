@@ -1,6 +1,17 @@
+import { useContext } from "react"
+import { BlocksContext } from "../../contexts/blocks"
+import CollectionContainer from "./CollectionContainer"
+
 const TimeLine = () => {
+  const { blocks, setBlocks } = useContext(BlocksContext)
   return (
-    <div>This is timeline</div>
+    <CollectionContainer>
+      {
+        blocks.map(block => (
+          <div>{block.id}</div>
+        ))
+      }
+    </CollectionContainer>
   )
 }
 
