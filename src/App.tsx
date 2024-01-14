@@ -4,7 +4,7 @@ import testData from "./testData"
 import AppContainer from "./components/AppContainer"
 import Editor from "./components/sections/Editor"
 import SideBar from "./components/sections/SideBar"
-import TimeLine from "./components/sections/TimeLine"
+import { TimeLine } from "./components/sections/collections/Collection"
 
 import { useState } from "react"
 

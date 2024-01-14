@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { BlocksContext } from "../../contexts/blocks"
+import { BlocksContext } from "../../../contexts/blocks"
 import CollectionContainer from "./CollectionContainer"
 
 const TimeLine = () => {
