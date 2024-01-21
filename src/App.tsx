@@ -13,9 +13,7 @@ const App = () => {
   }, [])
 
   return (
-    <div>
-      <HomeScreen blocks={blocks} />
-    </div>
+    <HomeScreen blocks={blocks} />
   )
 }
-export default App;
+export default App

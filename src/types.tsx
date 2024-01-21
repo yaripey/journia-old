@@ -16,6 +16,6 @@ export interface TodoBlock extends Block {
   isDone: boolean,
 }
 
-export type PageName = "home" | "search" | "editor";
+export type PageName = "home" | "search" | "editor"
 
-export type ContentBlock = NoteBlock | TodoBlock;
+export type ContentBlock = NoteBlock | TodoBlock

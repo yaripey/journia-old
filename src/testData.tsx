@@ -1,4 +1,4 @@
-import { ContentBlock } from "./types";
+import { ContentBlock } from "./types"
 
 const testData: ContentBlock[] = [
   {
@@ -33,6 +33,6 @@ const testData: ContentBlock[] = [
     lastEditedAt: Date.now(),
     type: "note",
   },
-];
+]
 
-export default testData;
+export default testData

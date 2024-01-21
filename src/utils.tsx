@@ -4,6 +4,7 @@ export const makeDateReadable = (date: number): string => {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  };
-  return dateObj.toLocaleDateString(undefined, options);
+  }
+
+  return dateObj.toLocaleDateString(undefined, options)
 }
