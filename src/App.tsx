@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import "./main.css"
 import useBlocksStore from "./store/blocksStore"
 import testData from "./testData"
+import HomeScreen from "./screens/HomeScreen"
 
 const App = () => {
   const blocks = useBlocksStore(state => state.blocks)
@@ -13,7 +14,7 @@ const App = () => {
 
   return (
     <div>
-      {blocks.map(block => <p>{block.id}</p>)}
+      <HomeScreen blocks={blocks} />
     </div>
   )
 }
