@@ -1,4 +1,4 @@
-import IconProps from "./iconProps"
+import { IconProps } from "./iconTypes"
 
 export const NoteBlockIcon = ({ width, height, fillColor }: IconProps) => {
   return (

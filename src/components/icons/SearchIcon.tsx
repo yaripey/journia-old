@@ -1,4 +1,4 @@
-import IconProps from "./iconProps"
+import { IconProps } from "./iconTypes"
 
 export const SearchIcon = ({ width, height, fillColor }: IconProps) => {
   return (

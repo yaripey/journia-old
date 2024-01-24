@@ -1,4 +1,5 @@
 import StyledScreen from "../components/common/StyledScreen"
+import TopBar from "../components/common/TopBar"
 import BlockCard from "../components/homeScreen/BlockCard"
 import { ContentBlock } from "../types"
 
@@ -8,6 +9,7 @@ interface HomeScreenProps {
 
 const HomeScreen = ({ blocks }: HomeScreenProps) => {
   return <StyledScreen>
+    <TopBar />
     <ul>
       {
         blocks.map(block =>
