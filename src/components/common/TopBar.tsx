@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import TopBarButton from "./TopBarButton"
 import React from "react"
+import useEditorStore from "../../store/editorStore"
+import useScreenStore from "../../store/screenStore"
 
 const TopBarContainer = styled.div`
   width: 100%;
@@ -11,15 +13,19 @@ const TopBarContainer = styled.div`
 `
 
 const TopBar: React.FC = () => {
-  const createNew = () => {
-    console.log("Creating new note")
+  const clearEditingBlock = useEditorStore(store => store.clearEditingBlock)
+  const setCurrentScreen = useScreenStore(store => store.setCurrentScreen)
+
+  const createNewBlock = () => {
+    clearEditingBlock()
+    setCurrentScreen("blockSelector")
   }
 
   return (
     <TopBarContainer>
       <div></div>
       <div>
-        <TopBarButton icon="plus" onClick={createNew} />
+        <TopBarButton icon="plus" onClick={createNewBlock} />
       </div>
     </TopBarContainer>
   )
