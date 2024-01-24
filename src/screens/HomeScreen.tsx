@@ -9,7 +9,13 @@ interface HomeScreenProps {
 const HomeScreen = ({ blocks }: HomeScreenProps) => {
   return <StyledScreen>
     <ul>
-      {blocks.map(block => <li key={block.id}><BlockCard block={block} /></li>)}
+      {
+        blocks.map(block =>
+          <li key={block.id}>
+            <BlockCard block={block} />
+          </li>
+        )
+      }
     </ul>
   </StyledScreen>
 }
