@@ -6,7 +6,7 @@ import { ContentBlock } from "../types"
 import useBlocksStore from "../store/blocksStore"
 
 const HomeScreen: React.FC = () => {
-  const blocks: ContentBlock[] = useBlocksStore(state => state.blocks)
+  const blocks: ContentBlock[] = useBlocksStore(store => store.blocks)
 
   return <StyledScreen>
     <TopBar />

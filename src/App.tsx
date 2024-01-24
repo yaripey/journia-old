@@ -7,9 +7,9 @@ import useScreenStore from "./store/screenStore"
 import NewBlockSelectorScreen from "./screens/NewBlockSelectorScreen"
 
 const App: React.FC = () => {
-  const currentScreen = useScreenStore(state => state.currentScreen)
+  const currentScreen = useScreenStore(store => store.currentScreen)
 
-  const setBlocks = useBlocksStore(state => state.setBlocks)
+  const setBlocks = useBlocksStore(store => store.setBlocks)
 
   useEffect(() => {
     setBlocks(testData)
