@@ -1,4 +1,5 @@
-import StyledScreen from "../components/common/screen"
+import StyledScreen from "../components/common/StyledScreen"
+import BlockCard from "../components/homeScreen/BlockCard"
 import { ContentBlock } from "../types"
 
 interface HomeScreenProps {
@@ -8,7 +9,7 @@ interface HomeScreenProps {
 const HomeScreen = ({ blocks }: HomeScreenProps) => {
   return <StyledScreen>
     <ul>
-      {blocks.map(block => <li key={block.id}>{block.id}</li>)}
+      {blocks.map(block => <li key={block.id}><BlockCard block={block} /></li>)}
     </ul>
   </StyledScreen>
 }
