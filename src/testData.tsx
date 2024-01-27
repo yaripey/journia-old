@@ -33,6 +33,14 @@ const testData: ContentBlock[] = [
     lastEditedAt: Date.now(),
     type: "note",
   },
+  {
+    id: "5",
+    type: "todo",
+    title: "Another mega todo",
+    isDone: true,
+    createdAt: Date.now(),
+    lastEditedAt: Date.now(),
+  },
 ]
 
 export default testData
