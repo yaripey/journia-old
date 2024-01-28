@@ -7,6 +7,7 @@ import useBlocksStore from "../store/blocksStore"
 
 const HomeScreen: React.FC = () => {
   const blocks: ContentBlock[] = useBlocksStore(store => store.blocks)
+  console.log(blocks)
 
   return <StyledScreen>
     <TopBar />

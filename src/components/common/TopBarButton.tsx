@@ -2,6 +2,7 @@ import React from "react"
 import { IconType } from "../icons/iconTypes"
 import styled from "styled-components"
 import { HomeIcon, PlusIcon, SearchIcon } from "../icons"
+import SaveIcon from "../icons/SaveIcon"
 
 const StyledButton = styled.button`
   width: 40px;
@@ -46,6 +47,8 @@ const Icon: React.FC<IconProps> = ({ icon }: IconProps) => {
       return <PlusIcon width={iconWidth} height={iconHeight} fillColor={iconColor} />
     case "search":
       return <SearchIcon width={iconWidth} height={iconHeight} fillColor={iconColor} />
+    case IconType.save:
+      return <SaveIcon width={iconWidth} height={iconHeight} fillColor={iconColor} />
     default:
       return <div>Wrong icon</div>
   }

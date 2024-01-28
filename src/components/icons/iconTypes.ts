@@ -4,4 +4,11 @@ export interface IconProps {
   fillColor: string
 }
 
-export type IconType = "home" | "noteBlock" | "plus" | "search" | "todoBlock"
+export enum IconType {
+  home = "home",
+  noteBlock = "noteBlock",
+  plus = "plus",
+  search = "search",
+  todoBlock = "todoBlock",
+  save = "save",
+}
