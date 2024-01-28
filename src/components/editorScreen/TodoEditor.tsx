@@ -1,10 +1,4 @@
-import { TodoBlock } from "../../types"
-
-interface TodoEditorProps {
-  todo: TodoBlock,
-}
-
-const TodoEditor: React.FC<TodoEditorProps> = () => {
+const TodoEditor: React.FC = () => {
   return <div>This us TodoEditor</div>
 }
 

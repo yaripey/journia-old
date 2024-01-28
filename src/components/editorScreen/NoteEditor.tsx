@@ -1,28 +1,30 @@
-import React, { useState } from "react"
 import { NoteBlock } from "../../types"
 import StyledForm from "./StyledForm"
+import EditorTopBar from "./EditorTopBar"
+import useEditorStore from "../../store/editorStore"
 
-
-
-interface NoteEditorProps {
-  note: NoteBlock,
-}
-
-const NoteEditor: React.FC<NoteEditorProps> = ({ note }: NoteEditorProps) => {
-  const [title, setTitle] = useState(note.title)
-  const [text, setText] = useState(note.text)
+const NoteEditor: React.FC = () => {
+  const note: NoteBlock = useEditorStore(store => store.editingBlock) as NoteBlock
+  const setNote = useEditorStore(store => store.setEditingBlock)
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value)
+    setNote({
+      ...note,
+      title: event.target.value
+    })
   }
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value)
+    setNote({
+      ...note,
+      text: event.target.value
+    })
   }
 
   return <StyledForm>
-    <input type="text" placeholder="New note" value={title} onChange={handleTitleChange} />
-    <textarea value={text} onChange={handleTextChange} />
+    <EditorTopBar />
+    <input type="text" placeholder="New note" value={note.title} onChange={handleTitleChange} />
+    <textarea value={note.text} onChange={handleTextChange} />
   </StyledForm>
 }
 

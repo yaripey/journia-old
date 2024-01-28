@@ -10,9 +10,9 @@ const Editor: React.FC = () => {
 
   switch (editingBlock.type) {
     case ContentBlockType.note:
-      return <NoteEditor note={editingBlock} />
+      return <NoteEditor />
     case ContentBlockType.todo:
-      return <TodoEditor todo={editingBlock} />
+      return <TodoEditor />
     default:
       return <div>This type of block isn't implemented yet.</div>
   }
