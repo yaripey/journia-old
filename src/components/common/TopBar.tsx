@@ -3,6 +3,7 @@ import TopBarButton from "./TopBarButton"
 import React from "react"
 import useEditorStore from "../../store/editorStore"
 import useScreenStore from "../../store/screenStore"
+import { ScreenName } from "../../types"
 
 const TopBarContainer = styled.div`
   width: 100%;
@@ -18,7 +19,7 @@ const TopBar: React.FC = () => {
 
   const createNewBlock = () => {
     clearEditingBlock()
-    setCurrentScreen("blockSelector")
+    setCurrentScreen(ScreenName.blockSelector)
   }
 
   return (

@@ -5,6 +5,8 @@ import testData from "./testData"
 import HomeScreen from "./screens/HomeScreen"
 import useScreenStore from "./store/screenStore"
 import NewBlockSelectorScreen from "./screens/NewBlockSelectorScreen"
+import { ScreenName } from "./types"
+import EditorScreen from "./screens/EditorScreen"
 
 const App: React.FC = () => {
   const currentScreen = useScreenStore(store => store.currentScreen)
@@ -16,11 +18,14 @@ const App: React.FC = () => {
   }, [])
 
   switch (currentScreen) {
-    case "home":
+    case ScreenName.home:
       return <HomeScreen />
 
-    case "blockSelector":
+    case ScreenName.blockSelector:
       return <NewBlockSelectorScreen />
+
+    case ScreenName.editor:
+      return <EditorScreen />
   }
 }
 export default App

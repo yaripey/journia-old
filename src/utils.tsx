@@ -1,4 +1,5 @@
 import { ContentBlockType, NoteBlock, TodoBlock } from "./types";
+import { v4 as uuid } from 'uuid'
 
 export const makeDateReadable = (date: number): string => {
   const dateObj = new Date(date);
@@ -31,4 +32,8 @@ export const makeEmptyTodo = (): TodoBlock => {
     title: "",
     type: ContentBlockType.todo
   }
+}
+
+export const makeBlockId = (): string => {
+  return uuid()
 }
