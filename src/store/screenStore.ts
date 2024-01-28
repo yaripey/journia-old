@@ -7,7 +7,7 @@ interface ScreenStore {
 }
 
 const useScreenStore = create<ScreenStore>((set) => ({
-  currentScreen: "home",
+  currentScreen: ScreenName.home,
   setCurrentScreen: (name: ScreenName) => set(() => ({ currentScreen: name }))
 }))
 
