@@ -1,4 +1,4 @@
-import { ContentBlock } from "./types"
+import { ContentBlock, ContentBlockType } from "./types"
 
 const testData: ContentBlock[] = [
   {
@@ -7,7 +7,7 @@ const testData: ContentBlock[] = [
     text: "Test note",
     createdAt: Date.now(),
     lastEditedAt: Date.now(),
-    type: "note",
+    type: ContentBlockType.note,
   },
   {
     id: "2",
@@ -15,11 +15,11 @@ const testData: ContentBlock[] = [
     text: "Another Test Note",
     createdAt: Date.now(),
     lastEditedAt: Date.now(),
-    type: "note",
+    type: ContentBlockType.note,
   },
   {
     id: "3",
-    type: "todo",
+    type: ContentBlockType.todo,
     title: "This is a super todo",
     isDone: false,
     createdAt: Date.now(),
@@ -31,11 +31,11 @@ const testData: ContentBlock[] = [
     text: "The bestest note out there",
     createdAt: Date.now(),
     lastEditedAt: Date.now(),
-    type: "note",
+    type: ContentBlockType.note,
   },
   {
     id: "5",
-    type: "todo",
+    type: ContentBlockType.todo,
     title: "Another mega todo",
     isDone: true,
     createdAt: Date.now(),
